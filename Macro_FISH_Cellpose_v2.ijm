@@ -153,6 +153,7 @@ for (i = 0; i < filenames.length; i++) {
 			// Write the updated lines back to the file
 			writeMacroLines(macroPath, lines);
 			i = filenames.length;
+			run("Close All");
 			break;
 		}
 		
