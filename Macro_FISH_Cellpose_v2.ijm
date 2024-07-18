@@ -15,7 +15,7 @@ cell_diameter = 180;
 
 function getCurrentMacroPath() {
     directory = getDirectory("current");
-    fileName = "Macro_David_v2.ijm";
+    fileName = "Macro_FISH_Cellpose_v2.ijm";
     return directory + fileName;
 }
 
