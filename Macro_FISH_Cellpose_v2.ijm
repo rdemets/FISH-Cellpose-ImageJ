@@ -133,7 +133,7 @@ for (i = 0; i < filenames.length; i++) {
 				roiManager("Measure");
 				area_temp = getResult("Area", 0);
 				run("Clear Results");
-				if (area_temp<20) {
+				if (area_temp<min_cell_size) {
 					roiManager("Delete");
 				}
 			}
