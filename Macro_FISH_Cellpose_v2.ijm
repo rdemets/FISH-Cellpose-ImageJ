@@ -1,5 +1,8 @@
-prominence = 100;
-cell_diameter = 180;
+prominence = 100; //for spot detection
+cell_diameter = 180; //for cellpose
+min_cell_size = 20; //for filtering cells
+
+
 // This macro aims to quantify the spots in nuclei using Cellpose
 // All function used are available from the stable version of Fiji and PTBIOP IJPB-plugins.
 // Requires installation of cellpose through Anaconda
@@ -7,15 +10,16 @@ cell_diameter = 180;
 
 
 // Macro author R. De Mets
-// Version : 0.1.1 , 09/07/2024
+// Version : 0.2.1 , 19/07/2024
 // Add trial mode
+// Filter small cells
 
 
 // Function to read the current macro code from the file into an array of lines
 
 function getCurrentMacroPath() {
     directory = getDirectory("current");
-    fileName = "Macro_David_v2.ijm";
+    fileName = "Macro_FISH_Cellpose_v2.ijm";
     return directory + fileName;
 }
 
@@ -122,6 +126,18 @@ for (i = 0; i < filenames.length; i++) {
 				roi_cellpose_Save = dirS + title+"_rois.zip";
 				roiManager("Save", roi_cellpose_Save);
 			}
+			
+			
+			for (im = roiManager("count"); im > 0; im--) {
+				roiManager("Select", im-1);
+				roiManager("Measure");
+				area_temp = getResult("Area", 0);
+				run("Clear Results");
+				if (area_temp<20) {
+					roiManager("Delete");
+				}
+			}
+
 	
 			// Retrieve number of detected nuclei
 			NNuc = roiManager("count");
@@ -153,6 +169,7 @@ for (i = 0; i < filenames.length; i++) {
 			// Write the updated lines back to the file
 			writeMacroLines(macroPath, lines);
 			i = filenames.length;
+			run("Close All");
 			break;
 		}
 		
