@@ -25,3 +25,4 @@ Please cite [Cellpose](https://www.nature.com/articles/s41592-020-01018-x) if yo
 (0.0.1) Segment using Cellpose for individual nuclei
 <br>(0.1.0) Add Dialog box
 <br>(0.1.1) Add trial checkbox
+<br>(0.1.2) Added all the different options for number of channels. Should be merged into a single more versatile script when more time
